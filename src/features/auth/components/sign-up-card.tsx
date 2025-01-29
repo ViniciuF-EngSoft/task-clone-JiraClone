@@ -19,16 +19,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Separator } from '@radix-ui/react-separator'
 
-const formSchema = z.object({
-    name: z.string().min(8, 'O nome precisa ter no mínimo 8 caracteres'),
-    email: z.string().email(),
-    password: z.string().min(8, 'Mínimo de 8 caracteres')
-})
+import { registerSchema } from '../schema'
+import { useRegister } from '../api/use-register'
 
 export const SignUpCard = () => {
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const {mutate} = useRegister()
+
+    const form = useForm<z.infer<typeof registerSchema>>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {
             name: "",
             email: "",
@@ -36,8 +35,8 @@ export const SignUpCard = () => {
         }
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log({ values })
+    const onSubmit = (values: z.infer<typeof registerSchema>) => {
+        mutate({json: values})
     }
 
 

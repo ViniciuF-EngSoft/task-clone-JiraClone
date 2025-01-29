@@ -19,31 +19,30 @@ import {
 } from '@/components/ui/form'
 import Link from 'next/link'
 import { Separator } from '@radix-ui/react-separator'
-
-
-const formSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(1, 'Tamanho mínimo não atingido.')
-})
+import { loginSchema } from '../schema'
+import { useLogin } from '../api/user-login'
 
 export const SignInCard = () => {
+    const {mutate} = useLogin()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: "",
             password: ""
         }
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log({ values })
+    const onSubmit = (values: z.infer<typeof loginSchema>) => {
+        mutate({
+            json:values,
+        })
     }
     return (
         <Card className="w-full h-full p-2 md:w-[487px] border-none shadow-none">
             <CardHeader className="flex items-center justify-center text-center py-7">
                 <CardTitle className="text-2xl">
-                    Welcome back!
+                    Bem-Vindo de volta!
                 </CardTitle>
             </CardHeader>
             <CardContent className="p-7 ">
