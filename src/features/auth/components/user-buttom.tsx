@@ -1,7 +1,7 @@
 "use client"
 
-import { Loader } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {  Loader, LogOut } from "lucide-react"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,6 +13,7 @@ import { useLogout } from "../api/use-logout"
 import { useCurrent } from "../api/use-current"
 
 export const UserButton = () => {
+    const {mutate: logout} = useLogout()
     const { data: user, isLoading } = useCurrent()
 
     if (isLoading) {
@@ -33,11 +34,37 @@ export const UserButton = () => {
 
     return (
         <DropdownMenu modal={false}>
-            <Avatar className="w-2 h-2 hover:opacity-75 border border-neutral-300 p-5 cursor-pointer text-muted-foreground bg-slate-300">
-                <AvatarFallback className="bg-slate-300 font-medium text-neutral-500 flex items-center justify-center">
-                    {avatarFallback}
-                </AvatarFallback>
-            </Avatar>
+            <DropdownMenuTrigger className="outline-none relative">
+                <Avatar className="w-2 h-2 hover:opacity-75 border border-neutral-300 p-5 cursor-pointer text-muted-foreground bg-slate-300">
+                    <AvatarFallback className="bg-slate-300 font-medium text-neutral-500 flex items-center justify-center">
+                        {avatarFallback}
+                    </AvatarFallback>
+                </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" side="bottom" className="w-60" sideOffset={10}>
+                <div className="flex flex-col items-center justify-center gap-2 px-2.5 py-4">
+                    <Avatar className="w-2 h-2 hover:opacity-75 border border-neutral-300 p-5 cursor-pointer text-muted-foreground bg-slate-300">
+                        <AvatarFallback className="bg-slate-300 font-medium text-xl text-neutral-500 flex items-center justify-center">
+                            {avatarFallback}
+                        </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col items-center justify-center">
+                        <p className="text-sm font-medium text-neutral-900">
+                            {name || "Usuário"}
+                        </p>
+                        <p className="text-sm text-neutral-500 flex">
+                            {email}
+                        </p>
+                    </div>
+                </div>
+                <DottedSeparator className="m-2"/>
+                <DropdownMenuItem 
+                onClick={()=> logout()}
+                className="h-10 flex items-center justify-center text-amber-700 font-medium cursor-pointer">
+                    <LogOut className="size-4 mr-2"/>
+                    Sair
+                </DropdownMenuItem>
+            </DropdownMenuContent>
         </DropdownMenu>
     )
 }
