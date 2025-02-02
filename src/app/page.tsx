@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useCurrent } from "@/features/auth/api/use-current";
 import { useLogout } from "@/features/auth/api/use-logout";
+import { UserButton } from "@/features/auth/components/user-buttom";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -19,11 +20,9 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div className="flex inline-block">
       Visível somente para usuários autorizados
-      <Button onClick={() => mutate()}>
-        Sair
-      </Button>
+      <UserButton />
     </div>
   );
 }

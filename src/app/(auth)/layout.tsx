@@ -21,7 +21,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
                     <Image src={Logo} height={50} width={56} alt="Logo" />
                     <Button asChild variant='secondary'>
                         <Link href={isSignIn ? '/sign-up' : '/sign-in'}>
-                        {isSignIn? "Entre" : "Criar conta"}
+                        {isSignIn? "Criar Conta" : "Entre"}
                         </Link>
                     </Button>
                 </nav>
