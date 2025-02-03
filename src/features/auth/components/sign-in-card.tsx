@@ -22,8 +22,9 @@ import { Separator } from '@radix-ui/react-separator'
 import { loginSchema } from '../schema'
 import { useLogin } from '../api/user-login'
 
-export const SignInCard = () => {
-    const {mutate} = useLogin()
+export const 
+SignInCard = () => {
+    const {mutate, isPending} = useLogin()
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -57,6 +58,7 @@ export const SignInCard = () => {
                                 <FormItem>
                                     <FormControl>
                                         <Input
+                                        disabled={isPending}
                                             {...field}
                                             type="email"
                                             placeholder="Digite seu email"
@@ -73,6 +75,7 @@ export const SignInCard = () => {
                                 <FormItem>
                                     <FormControl>
                                         <Input
+                                        disabled={isPending}
                                             {...field}
                                             type="password"
                                             placeholder="Digite sua senha"
@@ -82,7 +85,7 @@ export const SignInCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button className="w-full" disabled={false} size={'lg'}>
+                        <Button className="w-full" disabled={isPending} size={'lg'}>
                             Entrar
                         </Button>
                     </form>
@@ -94,13 +97,13 @@ export const SignInCard = () => {
             <CardContent>
                 <Button
                     variant={'ghost'} size={'lg'} className="w-full"
-                    disabled={false}>
+                    disabled={isPending}>
                     <FcGoogle className='mr-2 size-5' />
                     Entre com o Google
                 </Button>
                 <Button
                     variant={'ghost'} size={'lg'} className="w-full"
-                    disabled={false}>
+                    disabled={isPending}>
                     <FaGithub className='mr-2 size-5' />
                     Entre com o Github
                 </Button>
