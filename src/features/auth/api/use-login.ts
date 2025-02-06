@@ -18,10 +18,13 @@ export const useLogin = () => {
     >({
         mutationFn: async ({ json }) => {
             const response = await client.api.auth.login['$post']({ json })
+            if(!response.ok){
+                throw new Error("Falha ao entrar. Tente novamente em instantes.")
+            }
             return await response.json()
         },
         onSuccess: () => {
-            toast.success("Conta encontrada!")
+            toast.success("Bem-vindo de volta!")
             router.refresh()
             queryClient.invalidateQueries({ queryKey: ['current'] })
         },

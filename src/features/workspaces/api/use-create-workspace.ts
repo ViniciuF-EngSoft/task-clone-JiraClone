@@ -16,6 +16,9 @@ export const useCreateWorkspace = () => {
     >({
         mutationFn: async ({json}) => {
             const response = await client.api.workspaces['$post']({json})
+            if(!response.ok){
+                throw new Error("Falha ao criar área de trabalho. Tente novamente em instantes.")
+            }
             return await response.json()
         },
         onSuccess: () => {

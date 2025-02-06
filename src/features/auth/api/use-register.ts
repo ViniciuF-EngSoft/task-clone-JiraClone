@@ -18,6 +18,11 @@ export const useRegister = () => {
     >({
         mutationFn: async ({json}) => {
             const response = await client.api.auth.register['$post']({json})
+
+            if(!response.ok){
+                throw new Error("Falha ao registrar o usuário. Tente novamente em instantes.")
+            }
+
             return await response.json()
         },
         onSuccess: () => {
