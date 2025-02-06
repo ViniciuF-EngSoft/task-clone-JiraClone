@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { InferRequestType, InferResponseType } from "hono";
 import { client } from "@/lib/rpc";
@@ -18,7 +19,11 @@ export const useCreateWorkspace = () => {
             return await response.json()
         },
         onSuccess: () => {
+            toast.success("Criado com sucesso!")
             queryClient.invalidateQueries({queryKey: ["workspaces"]})
+        },
+        onError: () => {
+            toast.error("Falha ao criar.")
         }
     })
 
