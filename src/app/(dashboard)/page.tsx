@@ -1,6 +1,5 @@
 
 import { getCurrent } from "@/features/auth/actions";
-import { UserButton } from "@/features/auth/components/user-buttom";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
@@ -9,8 +8,8 @@ export default async function Home() {
   if(!user) redirect('/sign-in')
 
   return (
-    <div className="inline-block">
-      <UserButton />
+    <div className="">
+      Essa é a página inicial
     </div>
   );
 }

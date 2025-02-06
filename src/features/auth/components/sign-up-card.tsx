@@ -24,7 +24,7 @@ import { useRegister } from '../api/use-register'
 
 export const SignUpCard = () => {
 
-    const {mutate} = useRegister()
+    const {mutate, isPending} = useRegister()
 
     const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema),
@@ -70,6 +70,7 @@ export const SignUpCard = () => {
                                     <FormControl>
                                         <Input
                                             {...field}
+                                            disabled={isPending}
                                             type="text"
                                             placeholder="Digite seu nome"
                                         />
@@ -86,6 +87,7 @@ export const SignUpCard = () => {
                                     <FormControl>
                                         <Input
                                             {...field}
+                                            disabled={isPending}
                                             type="email"
                                             placeholder="Digite seu email"
                                         />
@@ -102,6 +104,7 @@ export const SignUpCard = () => {
                                     <FormControl>
                                         <Input
                                             {...field}
+                                            disabled={isPending}
                                             type="password"
                                             placeholder="Digite sua senha"
                                         />
@@ -110,7 +113,7 @@ export const SignUpCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button className="w-full" disabled={false} size={'lg'}>
+                        <Button className="w-full" disabled={isPending} size={'lg'}>
                             Entrar
                         </Button>
                     </form>
