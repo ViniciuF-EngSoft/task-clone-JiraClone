@@ -99,13 +99,15 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
                                             {field.value ? (
                                                 <div className='size-[72p-x] relative rounded-md overflow-hidden'>
                                                     <Image
-                                                        fill className='object-cover'
+                                                    className='object-cover m-2'
                                                         src={
                                                             field.value instanceof File
                                                                 ? URL.createObjectURL(field.value)
                                                                 : field.value
                                                         }
                                                         alt='Logo'
+                                                        width={64}
+                                                        height={64}
                                                     />
                                                 </div>
                                             ) : (
@@ -115,7 +117,7 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
                                                     </AvatarFallback>
                                                 </Avatar>
                                             )}
-                                            <div className='flex flex-col'>
+                                            <div className='flex flex-col p-3'>
                                                 <p className='text-sm'>Ícone da Área de Trabalho</p>
                                                 <p className='text-sm text-muted-foreground'>
                                                     JPG, PNG, SVG ou JPEG <span className='text-blue-500'>Máx. 1MB</span>
