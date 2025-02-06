@@ -1,5 +1,6 @@
 import { UserButton } from '@/features/auth/components/user-buttom'
 import React from 'react'
+import MobileSidebarComponent from './mobile-sidebar'
 
 const NavbarComponent = () => {
   return (
@@ -8,6 +9,7 @@ const NavbarComponent = () => {
             <h1 className='text-xl font-semibold'>Início</h1>
             <p className='text-muted-foreground'>Gerencie todos os seus projetos e tarefas aqui!</p>
         </div>
+        <MobileSidebarComponent />
         <UserButton />
     </nav>
   )
