@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { DottedSeparator } from './dotted-separator'
 import { NavigationComponent } from './navigation'
+import WorkSpaceSwuitcherComponent from './workspace-switcher'
 
 const SidebarComponent = () => {
     return (
@@ -10,6 +11,8 @@ const SidebarComponent = () => {
             <Link href='/'>
                 <Image src='/automation.png' alt='Logo' width={64} height={48} />
             </Link>
+            <DottedSeparator className='my-4' />
+            <WorkSpaceSwuitcherComponent />
             <DottedSeparator className='my-4' />
             <NavigationComponent />
         </aside>
