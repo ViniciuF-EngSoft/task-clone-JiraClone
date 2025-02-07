@@ -26,6 +26,7 @@ export const useLogout = () => {
             toast.success("Logout com sucesso.")
             router.refresh()
             queryClient.invalidateQueries({queryKey: ['current']})
+            queryClient.invalidateQueries({queryKey: ['workspaces']})
         },
         onError: ()=>{
             toast.error("Falha ao sair do sistema.")
