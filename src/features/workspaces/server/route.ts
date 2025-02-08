@@ -6,6 +6,7 @@ import { MemberRole } from "@/features/members/types";
 import { createWorkSpaceSchema } from "../schemas";
 import { DATABASE_ID, IMAGE_BUCKET_ID, MEMBERS_ID, WORKSPACE_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
+import { generateInviteCode } from "@/lib/utils";
 
 const app = new Hono()
     .get('/', sessionMiddleware, async (c) => {
@@ -19,7 +20,7 @@ const app = new Hono()
         )
 
         if(members.total === 0){
-            return c.json({data: {documens: [], total: 0}})
+            return c.json({data: {documents: [], total: 0}})
         }
 
         const workspaceIds = members.documents.map((member) => member.workspaceId)
@@ -71,8 +72,10 @@ const app = new Hono()
                     name,
                     userId: user.$id,
                     imageUrl: uploadedImageUrl,
+                    inviteCode: generateInviteCode(6),
                 }
             )
+
 
             await databases.createDocument(
                 DATABASE_ID,

@@ -6,7 +6,7 @@ export const useGetWorkspaces = () => {
     const query = useQuery({
         queryKey: ['workspaces'],
         queryFn: async () => {
-            const response = await client.api.workspaces.$get()
+            const response = await client.api.workspaces?.$get()
 
             if(!response.ok){
                 throw new Error('Falha ao carregas as áreas de trabalho.')
