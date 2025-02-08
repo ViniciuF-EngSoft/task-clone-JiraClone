@@ -1,6 +1,6 @@
 
 import { getCurrent } from "@/features/auth/actions";
-import CreaterWorkspaceFormComponent from "@/features/workspaces/components/create-workspaces-form";
+import { getWorkspaces } from "@/features/workspaces/actions";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
@@ -8,9 +8,12 @@ export default async function Home() {
 
   if(!user) redirect('/sign-in')
 
-  return (
-    <div className="bg-muted">
-      <CreaterWorkspaceFormComponent />
-    </div>
-  );
+    const workspaces = await getWorkspaces()
+
+    if(workspaces.total === 0){
+      redirect('/workspace/create')
+    } else{
+      redirect(`/workspaces/${workspaces.documents[0].$id}`)
+    }
+
 }

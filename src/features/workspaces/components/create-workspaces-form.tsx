@@ -22,6 +22,7 @@ import Image from 'next/image'
 import { Avatar } from '@radix-ui/react-avatar'
 import { AvatarFallback } from '@/components/ui/avatar'
 import { ArrowUpNarrowWide, ImageIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 
 interface CreateWorkspacesFormProps {
@@ -29,6 +30,7 @@ interface CreateWorkspacesFormProps {
 }
 
 const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) => {
+    const router = useRouter()
     const { mutate, isPending } = useCreateWorkspace()
 
     const inputRef = useRef<HTMLInputElement>(null)
@@ -47,7 +49,13 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
             image: values.image instanceof File ? values.image : ""
         }
 
-        mutate({ form: finalValues })
+        mutate({ form: finalValues },{
+            onSuccess: ({data}) => {
+                form.reset()
+                router.push(`/workspaces/${data.$id}`)
+                //onCancel?.()
+            }
+        })
     }
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

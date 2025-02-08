@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: "TaskAPP",
   description: "Task App with nextjs",
+  icons: '@/flavicon.ico'
 };
 
 export default function RootLayout({
