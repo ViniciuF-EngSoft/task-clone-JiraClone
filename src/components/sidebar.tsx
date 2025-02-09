@@ -8,7 +8,7 @@ import { ModeToggleThemeComponent } from './mode-theme-toggle'
 
 const SidebarComponent = () => {
     return (
-        <aside className='h-full p-4 w-full'>
+        <aside className='h-full p-4 w-full border-r-2'>
             <Link href='/'>
                 <Image src='/automation.png' alt='Logo' width={64} height={48} />
             </Link>

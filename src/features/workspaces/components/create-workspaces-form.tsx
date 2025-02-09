@@ -23,6 +23,7 @@ import { Avatar } from '@radix-ui/react-avatar'
 import { AvatarFallback } from '@/components/ui/avatar'
 import { ArrowUpNarrowWide, ImageIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 
 interface CreateWorkspacesFormProps {
@@ -159,6 +160,9 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
                             <Button type='button' size='lg' variant='secondary'
                                 onClick={onCancel}
                                 disabled={isPending}
+                                className={cn(
+                                    !onCancel && "invisible"
+                                )}
                             >
                                 Cancelar
                             </Button>
