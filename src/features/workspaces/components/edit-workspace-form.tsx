@@ -20,7 +20,7 @@ import { DottedSeparator } from '@/components/dotted-separator'
 import Image from 'next/image'
 import { Avatar } from '@radix-ui/react-avatar'
 import { AvatarFallback } from '@/components/ui/avatar'
-import { ArrowLeftIcon, ArrowUpNarrowWide, ImageIcon } from 'lucide-react'
+import { ArrowLeftIcon, ArrowUpNarrowWide, ImageIcon, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Workspace } from '../types'
@@ -150,7 +150,25 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
                                                     onChange={handleImageChange}
                                                     disabled={isPending}
                                                 />
+                                                {field.value ? (
                                                 <Button
+                                                    type='button'
+                                                    disabled={isPending}
+                                                    variant='destructive'
+                                                    size='sm'
+                                                    className='w-fit mt-4 p-4'
+                                                    onClick={() => {
+                                                        field.onChange(null)
+                                                        if(inputRef.current){
+                                                            inputRef.current.value = ''
+                                                        }
+                                                    }}
+                                                >
+                                                    <Trash2 />
+                                                    Remover imagen
+                                                </Button>
+                                                ) : (
+                                                    <Button
                                                     type='button'
                                                     disabled={isPending}
                                                     variant='ghost'
@@ -161,6 +179,7 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
                                                     <ArrowUpNarrowWide />
                                                     Upload de Imagem
                                                 </Button>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
