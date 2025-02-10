@@ -77,7 +77,6 @@ const app = new Hono()
                 }
             )
 
-
             await databases.createDocument(
                 DATABASE_ID,
                 MEMBERS_ID,
