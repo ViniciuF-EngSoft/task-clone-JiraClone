@@ -41,7 +41,7 @@ export const SignUpCard = () => {
 
 
     return (
-        <Card className="w-full h-full p-2 md:w-[487px] border-none shadow-none lg:w-[500px]">
+        <Card className="w-full h-full p-2 md:w-[487px] border-blue-800 shadow-md lg:w-[500px]">
             <CardHeader className="flex items-center justify-center text-center py-7">
                 <CardTitle className="text-2xl">
                     Crie sua conta agora!

@@ -67,7 +67,7 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
     }
 
     return (
-        <Card className='w-full h-full border-none shadow-none rounded-sm p-2'>
+        <Card className='w-full h-full border-none shadow-none rounded-sm p-2 dark:border-gray-800 dark:shadow-md dark:bg-transparent'>
             <CardHeader className='flex p-7'>
                 <CardTitle className='text-xl font-bold'>
                     Criar uma nova Área de Trabalho
@@ -79,7 +79,7 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
             <CardContent className='p-7'>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className='flex flex-col gap-y-4'>
+                        <div className='flex flex-col gap-y-4 rounded-sm border-none '>
                             <FormField
                                 control={form.control}
                                 name='name'
@@ -104,7 +104,7 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
                                 name='image'
                                 render={({ field }) => (
                                     <div className='flex flex-col gap-y-2 '>
-                                        <div className='flex items-center gap-x-5 justify-center p-2 bg-slate-400'>
+                                        <div className='flex items-center gap-x-5 justify-center p-2 bg-transparent'>
                                             {field.value ? (
                                                 <div className='size-[72p-x] relative rounded-md overflow-hidden'>
                                                     <Image
@@ -120,7 +120,7 @@ const CreaterWorkspaceFormComponent = ({ onCancel }: CreateWorkspacesFormProps) 
                                                     />
                                                 </div>
                                             ) : (
-                                                <Avatar className='size-[92px] p-2 bg-slate-400 rounded-md'>
+                                                <Avatar className='size-[92px] p-2  rounded-md'>
                                                     <AvatarFallback>
                                                         <ImageIcon className='size-[36px] text-neutral-400' />
                                                     </AvatarFallback>

@@ -29,9 +29,9 @@ const WorkSpaceSwuitcherComponent = () => {
 
     return (
         <div className='flex flex-col gap-y-2 outline-none'>
-            <p className='text-sm text-card-foreground m-1 text-gray-800'>Total: {workspaces?.total}</p>
+            <p className='text-sm text-card-foreground m-1 text-gray-800 dark:text-gray-200'>Total: {workspaces?.total}</p>
             <div className='flex items-center justify-between'>
-                <p className='text-sm  text-neutral-500'>Áreas de Trabalho</p>
+                <p className='text-sm  text-neutral-500 dark:text-neutral-200'>Áreas de Trabalho</p>
                 <RiAddCircleFill 
                 onClick={open}
                 className='size-5 text-neutral-500 cursor-pointer hover:opacity-75 transition' />

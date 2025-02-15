@@ -28,7 +28,7 @@ const WorkspaceAvatarComponent = ({
     <Avatar className={cn(
         "size-10", className
     )}>
-        <AvatarFallback className='text-white bg-blue-600 font-semibold text-lg'>
+        <AvatarFallback className='text-white font-semibold text-lg'>
             {name[0]}
         </AvatarFallback>
     </Avatar>

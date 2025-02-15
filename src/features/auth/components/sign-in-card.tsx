@@ -40,7 +40,7 @@ SignInCard = () => {
         })
     }
     return (
-        <Card className="w-full h-full p-2 md:w-[487px] border-none shadow-none">
+        <Card className="w-full h-full p-2 md:w-[487px] border-2 shadow-sm">
             <CardHeader className="flex items-center justify-center text-center py-7">
                 <CardTitle className="text-2xl">
                     Bem-Vindo de volta!
