@@ -28,6 +28,7 @@ import { useUpdateWorkspace } from '../api/use-update-workspace'
 import useConfirm from '@/hooks/use-confirm'
 import { useDeleteWorkspace } from '../api/use-delete-workspace'
 import { toast } from 'sonner'
+import { useResetInviteCode } from '../api/use-reset-invite-code'
 
 
 
@@ -49,6 +50,16 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
         "Deletar área de trabalho",
         "Essa ação não pode ser desfeita.",
         "destructive"
+    )
+    const {
+        mutate: resetInviteCode,
+        isPending: isResettingInviteCode,
+    } = useResetInviteCode()
+
+    const [ResetDialog, confirmReset] = useConfirm(
+        "Gerar novo link de convite",
+        "Esse código irá expiar em breve.",
+        "secondary"
     )
 
 
@@ -104,6 +115,21 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
             }
         )
     }
+    const handleResetInviteCode = async () => {
+        const ok = await confirmReset()
+
+        if (!ok) { return }
+
+        resetInviteCode({
+            param: { workspaceId: initialValues.$id },
+        },
+            {
+                onSuccess: () => {
+                    router.refresh()
+                }
+            }
+        )
+    }
 
     const handleCopyInviteLink = () => {
         navigator.clipboard.writeText(fullInviteLink)
@@ -115,6 +141,7 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
     return (
         <div className=' flex flex-col gap-4'>
             <DeleteDialog />
+            <ResetDialog />
             <Card className='w-full h-full  shadow-md rounded-sm p-2 mb-6'>
                 <CardHeader className='flex flex-row items-center justify-between'>
                     <Button size='sm' variant='secondary' onClick={onCancel ? onCancel : () => router.push(`/workspaces/${initialValues.$id}`)}
@@ -274,10 +301,10 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
                             size='sm'
                             variant='outline'
                             type='button'
-                            disabled={isPending || isDeletingWorkspace}
-                            onClick={handleDelete}
+                            disabled={isPending || isResettingInviteCode}
+                            onClick={handleResetInviteCode}
                         >
-                            Deletar área de trabalho
+                            Mudar link de convite
                         </Button>
                     </div>
                 </CardContent>
