@@ -20,13 +20,14 @@ import { DottedSeparator } from '@/components/dotted-separator'
 import Image from 'next/image'
 import { Avatar } from '@radix-ui/react-avatar'
 import { AvatarFallback } from '@/components/ui/avatar'
-import { ArrowLeftIcon, ArrowUpNarrowWide, ImageIcon, Trash2 } from 'lucide-react'
+import { ArrowLeftIcon, ArrowUpNarrowWide, CopyIcon, ImageIcon, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Workspace } from '../types'
 import { useUpdateWorkspace } from '../api/use-update-workspace'
 import useConfirm from '@/hooks/use-confirm'
 import { useDeleteWorkspace } from '../api/use-delete-workspace'
+import { toast } from 'sonner'
 
 
 
@@ -97,12 +98,19 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
         },
             {
                 onSuccess: () => {
-                    router.push("/") 
+                    router.push("/")
                     window.location.href = '/'
                 }
             }
         )
     }
+
+    const handleCopyInviteLink = () => {
+        navigator.clipboard.writeText(fullInviteLink)
+        .then(()=> toast.success("Copiado para área de transferência."))
+    }
+
+    const fullInviteLink = `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`
 
     return (
         <div className=' flex flex-col gap-4'>
@@ -240,6 +248,38 @@ const EditWorkspaceFormComponent = ({ onCancel, initialValues }: EditWorkspaceFo
                             </div>
                         </form>
                     </Form>
+                </CardContent>
+            </Card>
+            <Card className='w-full h-full rounded-sm shadow-sm p-3 mt-6'>
+                <CardContent className='p-7'>
+                    <div className='flex flex-col'>
+                        <h3 className='font-bold'>Convidar Membros</h3>
+                        <p className='text-sm text-muted-foreground mt-2'>
+                            Use o link de convite e compartilhe sua área de trabalho!
+                        </p>
+                        <div className='mt-4'>
+                            <div className='flex items-center gap-x-2'>
+                                    <Input disabled value={fullInviteLink}/>
+                                    <Button 
+                                    onClick={handleCopyInviteLink}
+                                    className=' p-2 ml-2'
+                                    variant='secondary'
+                                    >
+                                        Copiar
+                                        <CopyIcon />
+                                    </Button>
+                            </div>
+                        </div>
+                        <Button className='mt-6 w-fit ml-auto'
+                            size='sm'
+                            variant='outline'
+                            type='button'
+                            disabled={isPending || isDeletingWorkspace}
+                            onClick={handleDelete}
+                        >
+                            Deletar área de trabalho
+                        </Button>
+                    </div>
                 </CardContent>
             </Card>
             <Card className='w-full h-full rounded-sm shadow-sm p-3 mt-6'>
