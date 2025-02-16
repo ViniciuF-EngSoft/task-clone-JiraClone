@@ -7,6 +7,7 @@ import { AUTH_COOKIE } from "../auth/constants"
 import { DATABASE_ID, MEMBERS_ID, WORKSPACE_ID } from "@/config"
 import { getMember } from "../members/utils"
 import { Workspace } from "./types"
+import { createSessionClient } from "@/lib/appwrite"
 
 export const getWorkspaces = async () => {
     try {
@@ -86,6 +87,27 @@ export const getWorkspace = async ({workspaceId}:GetWorkspaceId) => {
             workspaceId
         )
         return workspace
+    } catch {
+        return null
+    }
+}
+interface GetWorkspaceIdInfoProps{
+    workspaceId: string
+}
+
+export const getWorkspaceInfo = async ({workspaceId}:GetWorkspaceIdInfoProps) => {
+    try {
+        const {databases} = await createSessionClient()
+
+        const workspace = await databases.getDocument<Workspace>(
+            DATABASE_ID, 
+            WORKSPACE_ID,
+            workspaceId
+        )
+        return {
+            name: workspace.name,
+
+        }
     } catch {
         return null
     }
