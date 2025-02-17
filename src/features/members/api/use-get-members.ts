@@ -12,7 +12,7 @@ export const useGetMembers = ({
     const query = useQuery({
         queryKey: ['members', workspaceId],
         queryFn: async () => {
-            const response = await client.api.members?.$get({query: {workspaceId}})
+            const response = await client.api.members.$get({query: {workspaceId}})
 
             if(!response.ok){
                 throw new Error('Falha ao carregas aos membros.')

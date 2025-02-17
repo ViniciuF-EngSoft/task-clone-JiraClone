@@ -34,7 +34,7 @@ const app = new Hono()
             const members = await databases.listDocuments(
                 DATABASE_ID,
                 MEMBERS_ID,
-                [Query.equal("wokspaceId", workspaceId)]
+                [Query.equal("workspaceId", workspaceId)]
             )
 
             const populatedMembers = await Promise.all(
