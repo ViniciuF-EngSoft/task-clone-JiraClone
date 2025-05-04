@@ -1,4 +1,5 @@
 import CreateWorkspaceModalComponent from '@/features/workspaces/components/create-workspace-modal'
+import CreateProjectModalComponent from '@/features/projects/components/create-project-modal'
 import NavbarComponent from '@/components/navbar'
 import SidebarComponent from '@/components/sidebar'
 import React from 'react'
@@ -11,6 +12,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     return (
         <div className='min-h-screen'>
             <CreateWorkspaceModalComponent />
+            <CreateProjectModalComponent />
             <div className='flex w-full h-full'>
                 <div className='fixed left-0 top-0 hidden lg:block lg:w-[264px] h-full overflow-auto'>
                     <SidebarComponent />

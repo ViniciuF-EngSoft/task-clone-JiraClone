@@ -5,6 +5,7 @@ import { DottedSeparator } from './dotted-separator'
 import { NavigationComponent } from './navigation'
 import WorkSpaceSwuitcherComponent from './workspace-switcher'
 import { ModeToggleThemeComponent } from './mode-theme-toggle'
+import ProjectsComponent from './projects'
 
 const SidebarComponent = () => {
     return (
@@ -17,6 +18,7 @@ const SidebarComponent = () => {
             <DottedSeparator className='my-4' />
             <NavigationComponent />
             <DottedSeparator className='my-4'/>
+            <ProjectsComponent />
             <ModeToggleThemeComponent />
         </aside>
     )
