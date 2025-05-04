@@ -14,16 +14,16 @@ export const useCreateWorkspace = () => {
         Error,
         RequestType
     >({
-        mutationFn: async ({form}) => {
-            const response = await client.api.workspaces['$post']({form})
-            if(!response.ok){
+        mutationFn: async ({ form }) => {
+            const response = await client.api.workspaces['$post']({ form })
+            if (!response.ok) {
                 throw new Error("Falha ao criar área de trabalho. Tente novamente em instantes.")
             }
             return await response.json()
         },
         onSuccess: () => {
             toast.success("Criado com sucesso!")
-            queryClient.invalidateQueries({queryKey: ["workspaces"]})
+            queryClient.invalidateQueries({ queryKey: ["workspaces"] })
         },
         onError: () => {
             toast.error("Falha ao criar.")
