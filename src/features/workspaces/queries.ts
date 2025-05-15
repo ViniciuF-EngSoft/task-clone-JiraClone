@@ -91,6 +91,7 @@ export const getWorkspace = async ({workspaceId}:GetWorkspaceId) => {
         return null
     }
 }
+
 interface GetWorkspaceIdInfoProps{
     workspaceId: string
 }
